@@ -1,3 +1,6 @@
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javax.swing.JFrame;
 
 
@@ -5,16 +8,21 @@ import javax.swing.JFrame;
 public class Board extends JFrame{
 
 	public Board(){
+		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		
 		this.setTitle("Board");
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		this.setResizable(false);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//this.setVisible(true);
-		CardPanel card1 = new CardPanel(1, 0, 1); 
-		this.add(card1);
-		//pack();
+		getContentPane().setSize((int)screenSize.getWidth(), (int)screenSize.getHeight());
+		/*this.setVisible(true);
+		CardPanel card1 = new CardPanel(1, 0, 1);
+		getContentPane().add(card1, BorderLayout.CENTER);
+		pack();
 		System.out.println("" + card1.getSize());
+		
+		this.add(card1);*/
 	}
 	
 	
