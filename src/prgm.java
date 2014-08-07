@@ -1,3 +1,5 @@
+import java.awt.AWTException;
+import java.awt.Robot;
 import java.util.ArrayList;
 
 public class prgm {
@@ -5,7 +7,20 @@ public class prgm {
 	// on crée un arraylist contenant chaque carte
 	private static ArrayList<CardPanel> listCard = new ArrayList<CardPanel>();
 
+	private static Robot r = null;
+
+	/**
+	 * Main
+	 */
 	public static void main(String[] args) {
+
+		// On créé un robot pour opérations utiles
+		try {
+			r = new Robot();
+		} catch (AWTException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		// on initialise le terrain
 		Board board = null;
@@ -32,9 +47,17 @@ public class prgm {
 
 		// on affiche la fenêtre
 		board.setVisible(true);
+
+		r.delay(6);
+
+		System.out.println(board.toString());
 	}
 
 	/**
+	 * Fonctions
+	 */
+
+	/*
 	 * Création des cartes
 	 */
 	// on crée une carte non instantiée

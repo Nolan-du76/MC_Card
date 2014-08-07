@@ -1,4 +1,3 @@
-
 public class Card {
 
 	private String nom;
@@ -6,8 +5,11 @@ public class Card {
 	private int def;
 	private int pv;
 	private boolean aggr;
-	
-	
+
+	/**
+	 * Constructeurs
+	 */
+	// constructeur vide (jeton ?)
 	public Card() {
 		super();
 		this.nom = "Pig";
@@ -16,8 +18,8 @@ public class Card {
 		this.pv = 1;
 		this.setAggr(false);
 	}
-	
-	
+
+	// constructeur
 	public Card(String nom, int att, int def, int pv, boolean aggr) {
 		super();
 		this.nom = nom;
@@ -26,46 +28,48 @@ public class Card {
 		this.pv = pv;
 		this.setAggr(aggr);
 	}
-	
-	
-	
-	
-	
+
+	/**
+	 * Getters/Setters
+	 */
 	public String getType() {
 		return nom;
 	}
+
 	public void setType(String nom) {
 		this.nom = nom;
 	}
+
 	public int getAtt() {
 		return att;
 	}
+
 	public void setAtt(int att) {
 		this.att = att;
 	}
+
 	public int getDef() {
 		return def;
 	}
+
 	public void setDef(int def) {
 		this.def = def;
 	}
+
 	public int getPv() {
 		return pv;
 	}
+
 	public void setPv(int pv) {
 		this.pv = pv;
 	}
-
 
 	public boolean isAggr() {
 		return aggr;
 	}
 
-
 	public void setAggr(boolean aggr) {
 		this.aggr = aggr;
 	}
-	
-	
-	
+
 }

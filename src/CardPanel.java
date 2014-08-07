@@ -22,12 +22,16 @@ public class CardPanel extends JPanel {
 	 */
 	public CardPanel(int att, int def, int pv) {
 
+		createCard();
+
 		// on initialise les panels
 		initLabel(att, def, pv);
 
 	}
 
 	public CardPanel() {
+
+		createCard();
 
 		// on initialise les panels
 		initLabel(1, 0, 1);
