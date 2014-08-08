@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 public class prgm {
 
-	// on crée un arraylist contenant chaque carte
-	private static ArrayList<CardPanel> listCard = new ArrayList<CardPanel>();
+	// on crée 2 arraylist contenant les cartes des joueurs
+	private static ArrayList<CardPanel> listCard_P1 = new ArrayList<CardPanel>();
+	private static ArrayList<CardPanel> listCard_P2 = new ArrayList<CardPanel>();
 
 	private static Robot r = null;
 
@@ -33,23 +34,43 @@ public class prgm {
 			e.printStackTrace();
 		}
 
+		
 		// on crée les cartes
-		addCard(1, 1, 1);
-		addCard(2, 2, 2);
-		addCard(3, 3, 3);
-		addCard(5, 5, 5);
-
-		// on ajoute et place chaque carte au terrain
-		for (int i = 0; i < listCard.size(); i++) {
-			board.getContentPane().add(listCard.get(i));
-			listCard.get(i).setLocation(listCard.get(1).getWidth() * i, 0);
-		}
+		addCard(listCard_P1);
+		addCard(listCard_P1, "Zombie", 2, 3, 4, true);
+		addCard(listCard_P2, "Poulet", 0, 0, 1, false);
+		addCard(listCard_P2, "Loup", 3, 0, 2, true);
 
 		// on affiche la fenêtre
 		board.setVisible(true);
 
+		// Delais pour avoir les dimensions full-screen
 		r.delay(6);
 
+		// on modifie la taille des camps
+		board.panelNorth.setSize(board.getBoardWidth(), board.getHeight() / 2 -10);
+		board.panelSouth.setLocation(0, board.panelNorth.getHeight());
+		board.panelSouth.setSize(board.getBoardWidth(), board.getHeight() / 2 -10);
+
+		/**
+		 * Ajouer les cartes
+		 */
+		// terrain du joueur 1
+		for (int i = 0; i < listCard_P1.size(); i++) {
+			// on ajoute les cartes au panel du J1
+			board.panelNorth.add(listCard_P1.get(i));
+			listCard_P1.get(i)
+					.setLocation(listCard_P1.get(1).getWidth() * i, 0);
+		}
+		// terrain du joueur 2
+		for (int i = 0; i < listCard_P2.size(); i++) {
+			// on ajoute les cartes au panel du J2
+			board.panelSouth.add(listCard_P2.get(i));
+			listCard_P2.get(i)
+					.setLocation(listCard_P2.get(1).getWidth() * i, 0);
+		}
+
+		// on affiche les dimensions du terrain
 		System.out.println(board.toString());
 	}
 
@@ -61,19 +82,20 @@ public class prgm {
 	 * Création des cartes
 	 */
 	// on crée une carte non instantiée
-	public static void addCard() {
+	public static void addCard(ArrayList<CardPanel> ArL) {
 		CardPanel card_null = new CardPanel();
-		listCard.add(card_null);
+		ArL.add(card_null);
 	}
 
 	// on créé une carte via ses valeurs
-	public static void addCard(int att, int def, int pv) {
-		CardPanel card_int = new CardPanel(att, def, pv);
-		listCard.add(card_int);
+	public static void addCard(ArrayList<CardPanel> ArL, String nom, int att,
+			int def, int pv, boolean aggr) {
+		CardPanel card_int = new CardPanel(nom, att, def, pv, aggr);
+		ArL.add(card_int);
 	}
 
 	// on ajoute une carte
-	public static void addCard(CardPanel card) {
-		listCard.add(card);
+	public static void addCard(ArrayList<CardPanel> ArL, CardPanel card) {
+		ArL.add(card);
 	}
 }

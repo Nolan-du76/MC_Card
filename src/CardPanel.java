@@ -1,9 +1,13 @@
+import java.awt.Color;
 import java.awt.Dimension;
+
 import javax.swing.JPanel;
+
 import java.awt.SystemColor;
+
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
-import javax.swing.border.BevelBorder;
+import javax.swing.border.MatteBorder;
 
 @SuppressWarnings("serial")
 public class CardPanel extends JPanel {
@@ -16,31 +20,56 @@ public class CardPanel extends JPanel {
 	private JLabel lbl_att;
 	private JLabel lbl_def;
 	private JLabel lbl_pv;
+	private JLabel lbl_nom;
+
+	// on créé une carte
+	private Card carte = null;
+
+	// couleur de la carte = aggressif
+	private Color cardColor = new Color(0, 0, 0);
 
 	/**
-	 * Create the frame.
+	 * création de la carte.
 	 */
-	public CardPanel(int att, int def, int pv) {
+	// constructeur complet
+	public CardPanel(String nom, int att, int def, int pv, boolean aggr) {
 
+		// on choisi la couleur de la bordure
+		if (aggr)
+			cardColor = Color.red;
+		else
+			cardColor = Color.green;
+
+		// on créé la carte
 		createCard();
 
+		// on initialise la carte
+		carte = new Card(nom, att, def, pv, aggr);
+
 		// on initialise les panels
-		initLabel(att, def, pv);
+		initLabel(nom, att, def, pv);
 
 	}
 
+	// constructeur vide
 	public CardPanel() {
+
+		cardColor = Color.green;
 
 		createCard();
 
+		// on initialise la carte
+		carte = new Card();
+
 		// on initialise les panels
-		initLabel(1, 0, 1);
+		initLabel("Cochon", 1, 0, 1);
 
 	}
 
 	public void createCard() {
+
 		// on créé le panel de la carte avec la bordure
-		setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		setBorder(new MatteBorder(2, 2, 2, 2, (Color) (cardColor)));
 		setBounds(100, 100, largeur, hauteur);
 
 		// on set la taille du panel
@@ -55,7 +84,7 @@ public class CardPanel extends JPanel {
 	 * @param def
 	 * @param pv
 	 */
-	public void initLabel(int att, int def, int pv) {
+	public void initLabel(String nom, int att, int def, int pv) {
 
 		// on transforme les int en string
 		String att_str = new Integer(att).toString();
@@ -86,5 +115,32 @@ public class CardPanel extends JPanel {
 		lbl_pv.setBackground(SystemColor.menu);
 		lbl_pv.setBounds(219, 375, 21, 14);
 		this.add(lbl_pv);
+
+		// label de nom
+		lbl_nom = new JLabel();
+		lbl_nom.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_nom.setText(nom);
+		lbl_nom.setBackground(SystemColor.menu);
+		lbl_nom.setBounds(102, 25, 46, 14);
+		this.add(lbl_nom);
+	}
+
+	/**
+	 * Getters/Setters
+	 */
+	public Card getCarte() {
+		return carte;
+	}
+
+	public void setCarte(Card carte) {
+		this.carte = carte;
+	}
+
+	public Color getCardColor() {
+		return cardColor;
+	}
+
+	public void setCardColor(Color cardColor) {
+		this.cardColor = cardColor;
 	}
 }

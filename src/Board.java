@@ -5,6 +5,8 @@ import java.awt.GraphicsEnvironment;
 import javax.swing.JFrame;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
 
 @SuppressWarnings("serial")
 public class Board extends JFrame {
@@ -12,6 +14,8 @@ public class Board extends JFrame {
 	// on enregistre la taille
 	private int height;
 	private int width;
+	JPanel panelNorth = new JPanel();
+	JPanel panelSouth = new JPanel();
 
 	/**
 	 * constructeur
@@ -21,6 +25,18 @@ public class Board extends JFrame {
 		this.setTitle("Board");
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
+		
+		/**
+		 * on crée les panels de side
+		 */
+		panelNorth.setBounds(0, 0, width, height/2);
+		panelNorth.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		getContentPane().add(panelNorth);
+		
+		panelSouth.setBounds(0, height/2, width, height);
+		panelSouth.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		getContentPane().add(panelSouth);
 
 		/**
 		 * Events plein écran
@@ -49,7 +65,7 @@ public class Board extends JFrame {
 	// Fonction pour fullscreen partiel
 	public void setMaxScreenSize() {
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		this.getBoardSize();
+		this.recordBoardSize();
 	}
 
 	/**
@@ -71,7 +87,7 @@ public class Board extends JFrame {
 		this.width = width;
 	}
 
-	public void getBoardSize() {
+	public void recordBoardSize() {
 		this.height = this.getHeight();
 		this.width = this.getWidth();
 	}
@@ -80,5 +96,5 @@ public class Board extends JFrame {
 	public String toString() {
 		return "Board [height : " + height + ", width : " + width + "]";
 	}
-	
+
 }
